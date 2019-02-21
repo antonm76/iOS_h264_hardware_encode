@@ -146,24 +146,25 @@ void didCompressH264(void *outputCallbackRefCon, void *sourceFrameRefCon, OSStat
         // For testing out the logic, lets read from a file and then send it to encoder to create h264 stream
         
         // Create the compression session
-        OSStatus status = VTCompressionSessionCreate(NULL, width, height, kCMVideoCodecType_H264, NULL, NULL, NULL, didCompressH264, (__bridge void *)(self), &encodeSession);
+        OSStatus status = VTCompressionSessionCreate(NULL, width, height, kCMVideoCodecType_H264, NULL, NULL, NULL, didCompressH264, (__bridge void *)(self), &self->encodeSession);
         
         NSLog(@"H264: VTCompressionSessionCreate %d", (int)status);
         
         if (status != 0) {
             NSLog(@"H264: Unable to create H264 session");
-            error = @"H264: Unable to create H264 session";
+            self->error = @"H264: Unable to create H264 session";
             
             return;
         }
         
         // Set the properties
-        VTSessionSetProperty(encodeSession, kVTCompressionPropertyKey_RealTime, kCFBooleanTrue);
-        VTSessionSetProperty(encodeSession, kVTCompressionPropertyKey_MaxKeyFrameInterval, (__bridge CFNumberRef)@(10.0)); // change the frame number between 2 I frame
-        VTSessionSetProperty(encodeSession, kVTCompressionPropertyKey_ProfileLevel, kVTProfileLevel_H264_Main_AutoLevel);
+        VTSessionSetProperty(self->encodeSession, kVTCompressionPropertyKey_RealTime, kCFBooleanTrue);
+        VTSessionSetProperty(self->encodeSession, kVTCompressionPropertyKey_MaxKeyFrameInterval, (__bridge CFNumberRef)@(10.0)); // change the frame number between 2 I frame
+        VTSessionSetProperty(self->encodeSession, kVTCompressionPropertyKey_Quality, (__bridge CFNumberRef)@(0.5));
+        VTSessionSetProperty(self->encodeSession, kVTCompressionPropertyKey_DataRateLimits, (__bridge CFArrayRef)@[@(3000 * 1024 / 8), @1]);
     
         // Tell the encoder to start encoding
-        VTCompressionSessionPrepareToEncodeFrames(encodeSession);
+        VTCompressionSessionPrepareToEncodeFrames(self->encodeSession);
     });
 }
 
@@ -171,33 +172,33 @@ void didCompressH264(void *outputCallbackRefCon, void *sourceFrameRefCon, OSStat
 - (void)encode:(CMSampleBufferRef)sampleBuffer
 {
     dispatch_sync(encodeQueue, ^{
-        frameCount++;
         // Get the CV Image buffer
         CVImageBufferRef imageBuffer = (CVImageBufferRef)CMSampleBufferGetImageBuffer(sampleBuffer);
         
         // Create properties
-        CMTime presentationTimeStamp = CMTimeMake(frameCount, 1000);
-        //CMTime duration = CMTimeMake(1, DURATION);
+        CMTime presentationTimeStamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
+        // CMTime presentationTimeStamp = CMTimeMake(++frameCount, 30);
+        CMTime duration = CMSampleBufferGetDuration(sampleBuffer); // CMTimeMake(1, 30);
         VTEncodeInfoFlags flags;
         
         // Pass it to the encoder
-        OSStatus statusCode = VTCompressionSessionEncodeFrame(encodeSession,
+        OSStatus statusCode = VTCompressionSessionEncodeFrame(self->encodeSession,
                                                               imageBuffer,
                                                               presentationTimeStamp,
-                                                              kCMTimeInvalid,
+                                                              duration,
                                                               NULL, NULL, &flags);
         
         // Check for error
         if (statusCode != noErr) {
             
             NSLog(@"H264: VTCompressionSessionEncodeFrame failed with %d", (int)statusCode);
-            error = @"H264: VTCompressionSessionEncodeFrame failed ";
+            self->error = @"H264: VTCompressionSessionEncodeFrame failed ";
             
             // End the session
-            VTCompressionSessionInvalidate(encodeSession);
-            CFRelease(encodeSession);
-            encodeSession = NULL;
-            error = NULL;
+            VTCompressionSessionInvalidate(self->encodeSession);
+            CFRelease(self->encodeSession);
+            self->encodeSession = NULL;
+            self->error = NULL;
             return;
         }
         NSLog(@"H264: VTCompressionSessionEncodeFrame Success");

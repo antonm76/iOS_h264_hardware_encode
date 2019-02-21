@@ -8,6 +8,10 @@
 
 #import "ViewController.h"
 #import "VideoEncode.h"
+#import "iOS_H264Encode-Swift.h"
+
+const BOOL isFile = NO;
+
 @interface ViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate, H264HwEncoderDelegate>
 {
     AVCaptureSession *captureSession;
@@ -15,9 +19,11 @@
     AVCaptureConnection *connection;
     bool isStart;
     VideoEncode *videoEncode;
+    SocketWriter *socketWriter;
     NSFileHandle *fileHandle;
     NSString *h264File;
 }
+
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
 @end
 
@@ -80,7 +86,7 @@
     
     // begin configuration for the AVCaptureSession
     [captureSession beginConfiguration];
-    captureSession.sessionPreset = AVCaptureSessionPreset640x480;
+    captureSession.sessionPreset = AVCaptureSessionPreset1280x720;
     connection = [outputDevice connectionWithMediaType:AVMediaTypeVideo];
     [captureSession commitConfiguration];
     
@@ -102,13 +108,20 @@
 
     fileHandle = [NSFileHandle fileHandleForWritingAtPath:h264File];
     
-    [videoEncode initEncode:640 height:480];
+    if (!isFile)
+    {
+        socketWriter = [SocketWriter new];
+        [socketWriter start];
+    }
+    
+    [videoEncode initEncode:1280 height:720];
     videoEncode.delegate = self;
 }
 
 - (void)stopCamera
 {
     [captureSession stopRunning];
+    [fileHandle synchronizeFile];
 }
 
 -(void) captureOutput:(AVCaptureOutput*)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection*)connection
@@ -125,24 +138,42 @@
     size_t length = (sizeof bytes) - 1; //string literals have implicit trailing '\0'
     NSData *ByteHeader = [NSData dataWithBytes:bytes length:length];
     
-    [fileHandle writeData:ByteHeader];
-    [fileHandle writeData:sps];
-    [fileHandle writeData:ByteHeader];
-    [fileHandle writeData:pps];
+    if (isFile)
+    {
+        [fileHandle writeData:ByteHeader];
+        [fileHandle writeData:sps];
+        [fileHandle writeData:ByteHeader];
+        [fileHandle writeData:pps];
+    }
+    else
+    {
+        [socketWriter writeData:ByteHeader];
+        [socketWriter writeData:sps];
+        [socketWriter writeData:ByteHeader];
+        [socketWriter writeData:pps];
+    }
     
 }
 - (void)gotEncodedData:(NSData*)data isKeyFrame:(BOOL)isKeyFrame
 {
     NSLog(@"gotEncodedData %d", (int)[data length]);
   
-    if (fileHandle != NULL)
+    if ((isFile && fileHandle != NULL) || socketWriter != NULL)
     {
         const char bytes[] = "\x00\x00\x00\x01";
         size_t length = (sizeof bytes) - 1; //string literals have implicit trailing '\0'
         NSData *ByteHeader = [NSData dataWithBytes:bytes length:length];
       
-        [fileHandle writeData:ByteHeader];
-        [fileHandle writeData:data];
+        if (isFile)
+        {
+            [fileHandle writeData:ByteHeader];
+            [fileHandle writeData:data];
+        }
+        else
+        {
+            [socketWriter writeData:ByteHeader];
+            [socketWriter writeData:data];
+        }
     }
 }
 

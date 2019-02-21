@@ -1,0 +1,16 @@
+PODS:
+  - Socket.swift (2.3.0)
+
+DEPENDENCIES:
+  - Socket.swift (~> 2.3)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Socket.swift
+
+SPEC CHECKSUMS:
+  Socket.swift: aac01e588724e57a6a871b945184444f2b6521fc
+
+PODFILE CHECKSUM: 2aca3e4d841355baecb6cb6b6d62f42a1c2e2663
+
+COCOAPODS: 1.6.0

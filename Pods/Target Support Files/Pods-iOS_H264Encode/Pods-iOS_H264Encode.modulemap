@@ -1,0 +1,6 @@
+module Pods_iOS_H264Encode {
+  umbrella header "Pods-iOS_H264Encode-umbrella.h"
+
+  export *
+  module * { export * }
+}

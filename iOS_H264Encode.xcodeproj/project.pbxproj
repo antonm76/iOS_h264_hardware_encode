@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A4B3B8DAB148F10B99DB4748 /* libPods-iOS_H264Encode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DD027CB0027CB8AC5A1B096 /* libPods-iOS_H264Encode.a */; };
 		C40C5F911CBF340400C4C36F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C40C5F901CBF340400C4C36F /* main.m */; };
 		C40C5F941CBF340400C4C36F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C40C5F931CBF340400C4C36F /* AppDelegate.m */; };
 		C40C5F971CBF340400C4C36F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C40C5F961CBF340400C4C36F /* ViewController.m */; };
@@ -16,9 +17,13 @@
 		C40C5FA21CBF340400C4C36F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C40C5FA01CBF340400C4C36F /* LaunchScreen.storyboard */; };
 		C40C5FAA1CBF3CB400C4C36F /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C40C5FA91CBF3CB400C4C36F /* VideoToolbox.framework */; };
 		C40C5FAD1CBF7C6900C4C36F /* VideoEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = C40C5FAC1CBF7C6900C4C36F /* VideoEncode.m */; };
+		D3D3A8EB221F129800A73C1B /* SocketWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D3A8EA221F129800A73C1B /* SocketWriter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2DD027CB0027CB8AC5A1B096 /* libPods-iOS_H264Encode.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOS_H264Encode.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		44477C972DD422DF7FF55B38 /* Pods-iOS_H264Encode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS_H264Encode.debug.xcconfig"; path = "Target Support Files/Pods-iOS_H264Encode/Pods-iOS_H264Encode.debug.xcconfig"; sourceTree = "<group>"; };
+		5E2086F8F446CD27278E86EB /* Pods-iOS_H264Encode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS_H264Encode.release.xcconfig"; path = "Target Support Files/Pods-iOS_H264Encode/Pods-iOS_H264Encode.release.xcconfig"; sourceTree = "<group>"; };
 		C40C5F8C1CBF340400C4C36F /* iOS_H264Encode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_H264Encode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C40C5F901CBF340400C4C36F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C40C5F921CBF340400C4C36F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -33,6 +38,8 @@
 		C40C5FA91CBF3CB400C4C36F /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		C40C5FAB1CBF7C6900C4C36F /* VideoEncode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoEncode.h; sourceTree = "<group>"; };
 		C40C5FAC1CBF7C6900C4C36F /* VideoEncode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoEncode.m; sourceTree = "<group>"; };
+		D3D3A8E9221F129700A73C1B /* iOS_H264Encode-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOS_H264Encode-Bridging-Header.h"; sourceTree = "<group>"; };
+		D3D3A8EA221F129800A73C1B /* SocketWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketWriter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,17 +48,37 @@
 			buildActionMask = 2147483647;
 			files = (
 				C40C5FAA1CBF3CB400C4C36F /* VideoToolbox.framework in Frameworks */,
+				A4B3B8DAB148F10B99DB4748 /* libPods-iOS_H264Encode.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1EB6B75E96A74D81BDC55A0D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				44477C972DD422DF7FF55B38 /* Pods-iOS_H264Encode.debug.xcconfig */,
+				5E2086F8F446CD27278E86EB /* Pods-iOS_H264Encode.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B00412FA093E26B7E71DB204 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2DD027CB0027CB8AC5A1B096 /* libPods-iOS_H264Encode.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C40C5F831CBF340400C4C36F = {
 			isa = PBXGroup;
 			children = (
 				C40C5F8E1CBF340400C4C36F /* iOS_H264Encode */,
 				C40C5F8D1CBF340400C4C36F /* Products */,
+				1EB6B75E96A74D81BDC55A0D /* Pods */,
+				B00412FA093E26B7E71DB204 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,6 +105,8 @@
 				C40C5FA31CBF340400C4C36F /* Info.plist */,
 				C40C5F9B1CBF340400C4C36F /* iOS_H264Encode.xcdatamodeld */,
 				C40C5F8F1CBF340400C4C36F /* Supporting Files */,
+				D3D3A8EA221F129800A73C1B /* SocketWriter.swift */,
+				D3D3A8E9221F129700A73C1B /* iOS_H264Encode-Bridging-Header.h */,
 			);
 			path = iOS_H264Encode;
 			sourceTree = "<group>";
@@ -98,6 +127,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C40C5FA61CBF340400C4C36F /* Build configuration list for PBXNativeTarget "iOS_H264Encode" */;
 			buildPhases = (
+				657F2325A0CBF8518D0517AD /* [CP] Check Pods Manifest.lock */,
 				C40C5F881CBF340400C4C36F /* Sources */,
 				C40C5F891CBF340400C4C36F /* Frameworks */,
 				C40C5F8A1CBF340400C4C36F /* Resources */,
@@ -117,11 +147,12 @@
 		C40C5F841CBF340400C4C36F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = NTU;
 				TargetAttributes = {
 					C40C5F8B1CBF340400C4C36F = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -156,6 +187,31 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		657F2325A0CBF8518D0517AD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS_H264Encode-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C40C5F881CBF340400C4C36F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -164,6 +220,7 @@
 				C40C5FAD1CBF7C6900C4C36F /* VideoEncode.m in Sources */,
 				C40C5F971CBF340400C4C36F /* ViewController.m in Sources */,
 				C40C5F941CBF340400C4C36F /* AppDelegate.m in Sources */,
+				D3D3A8EB221F129800A73C1B /* SocketWriter.swift in Sources */,
 				C40C5F911CBF340400C4C36F /* main.m in Sources */,
 				C40C5F9D1CBF340400C4C36F /* iOS_H264Encode.xcdatamodeld in Sources */,
 			);
@@ -199,13 +256,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -243,13 +310,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -268,6 +345,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -275,25 +353,34 @@
 		};
 		C40C5FA71CBF340400C4C36F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44477C972DD422DF7FF55B38 /* Pods-iOS_H264Encode.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = iOS_H264Encode/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.iOS-H264Encode";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iOS_H264Encode/iOS_H264Encode-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
 		C40C5FA81CBF340400C4C36F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5E2086F8F446CD27278E86EB /* Pods-iOS_H264Encode.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = iOS_H264Encode/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.iOS-H264Encode";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iOS_H264Encode/iOS_H264Encode-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -316,6 +403,7 @@
 				C40C5FA81CBF340400C4C36F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
